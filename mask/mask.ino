@@ -14,14 +14,16 @@ void setup() {
       FastLED.addLeds<WS2812B, DATA_PIN, GRB>(leds, NUM_LEDS);
       FastLED.setBrightness(50);
 }
-functionList effectList[] = {single,
-                           /*  threeSine,
+functionList effectList[] = {//single, // Made by Marvin
+                             //inward, // Made by Marvin
+                             rider,
+                             threeSine,
                              plasma,
                              confetti,
                              glitter,
                              slantBars,
                              colorFill,
-                             sideRain */
+                             sideRain
                             };
 const byte numEffects = (sizeof(effectList)/sizeof(effectList[0]));
 
