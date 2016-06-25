@@ -3,8 +3,8 @@
 #define cycleTime 15000
 // Hue time (milliseconds between hue increments)
 #define hueTime 30
-#define MAXBRIGHTNESS 72
-#define STARTBRIGHTNESS 102
+#define MAXBRIGHTNESS 255
+#define STARTBRIGHTNESS 255
 // Global variables
 boolean effectInit = false; // indicates if a pattern has been recently switched
 uint16_t effectDelay = 0; // time between automatic effect changes
