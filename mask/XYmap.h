@@ -18,16 +18,18 @@
 
 
 // Params for width and height
-const uint8_t kMatrixWidth = 15;
-const uint8_t kMatrixHeight = 3;
+const uint8_t kMatrixWidth = 20;
+const uint8_t kMatrixHeight = 5;
 
 // Pixel layout
 //
-//      0  1  2  3  4  5  6  7  8  9 10 11 12 13 14
-//   +---------------------------------------------
-// 0 |  0  1  2  3  4  5  6  7  8  9 10 11 12 13 14
-// 1 | 29 28 27 26 25 24 23 22 21 20 19 18 17 16 15
-// 2 | 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44
+//      0  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 19
+//   +------------------------------------------------------------
+// 0 |  .  .  .  .  .  0  1  2  3  4  5  6  7  8  9 10 11 12 13 14
+// 1 |  .  .  .  .  . 29 28 27 26 25 24 23 22 21 20 19 18 17 16 15
+// 2 |  .  .  .  .  . 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44
+// 3 | 65 64 63 62 61 60 59 58 57 56 55 54 53 52 51 49 48 47 46 45                                   
+// 4 | 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82 83 84 85
 
 #define NUM_LEDS (kMatrixWidth * kMatrixHeight)
 CRGB leds[ NUM_LEDS ];
@@ -36,7 +38,7 @@ CRGB leds[ NUM_LEDS ];
 // a given set of X and Y coordinates on your RGB Shades.
 // This code, plus the supporting 80-byte table is much smaller
 // and much faster than trying to calculate the pixel ID with code.
-#define LAST_VISIBLE_LED 44
+#define LAST_VISIBLE_LED 85
 uint8_t XY( uint8_t x, uint8_t y)
 {
   // any out of bounds address maps to the first hidden pixel
@@ -45,9 +47,11 @@ uint8_t XY( uint8_t x, uint8_t y)
   }
 
   const uint8_t ShadesTable[] = {
-     0,  1,  2,  3,  4,  5,  6,  7,  8,  9, 10, 11, 12, 13, 14,
-     29, 28, 27, 26, 25, 24, 23, 22, 21, 20, 19, 18, 17, 16, 15,
-     30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44
+     86, 87, 88, 89, 90,   0,  1,  2,  3,  4,  5,  6,  7,  8,  9, 10, 11, 12, 13, 14,
+     91, 92, 93, 94, 95,  29, 28, 27, 26, 25, 24, 23, 22, 21, 20, 19, 18, 17, 16, 15,
+     96, 97, 98, 99, 100, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44,
+     65, 64, 63, 62, 61,  60, 59, 58, 57, 56, 55, 54, 53, 52, 51, 49, 48, 47, 46, 45,
+     66, 67, 68, 69, 70,  71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85,
     };
 
   uint8_t i = (y * kMatrixWidth) + x;
