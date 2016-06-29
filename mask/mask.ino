@@ -12,7 +12,10 @@
 void setup() { 
       // Uncomment/edit one of the following lines for your leds arrangement.
       FastLED.addLeds<WS2812B, DATA_PIN, GRB>(leds, NUM_LEDS);
-      FastLED.setBrightness(50);
+      FastLED.setBrightness(50); // MN: Can't change this value on the fly so need to be included as Hue value in every function.
+	  
+	  pinMode(13, OUTPUT);
+	  
 }
 functionList effectList[] = {//single, // Made by Marvin
                              //inward, // Made by Marvin
@@ -29,6 +32,10 @@ const byte numEffects = (sizeof(effectList)/sizeof(effectList[0]));
 
 void loop() {
   currentMillis = millis(); // save the current timer value
+
+  if ((millis() % 1000) < 500) digitalWrite(13, HIGH);
+  else digitalWrite(13, LOW);
+
   // switch to a new effect every cycleTime milliseconds
   if (currentMillis - cycleMillis > cycleTime && autoCycle == true) {
     cycleMillis = currentMillis;
