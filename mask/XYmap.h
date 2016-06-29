@@ -57,3 +57,26 @@ uint8_t XY( uint8_t x, uint8_t y)
   uint8_t j = ShadesTable[i];
   return j;
 }
+
+/*
+
+strip_begin[0]=0; // eerste rij
+strip_begin[1]=15; // tweede rij
+strip_begin[2]=30; // derde rij
+strip_begin[3]=45; // buiten U
+strip_begin[4]=65; // binnen U
+strip_begin[5]=83; 
+strip_begin[6]=88; // sik
+strip_begin[7]=93;
+strip_begin[8]=98;
+strip_begin[9]=102; // snor
+strip_begin[10]=107;
+strip_begin[11]=111; // traan links
+strip_begin[12]=113; // neus links
+strip_begin[13]=116; // neus midden
+strip_begin[14]=119; // neus rechts
+strip_begin[15]=122; // traan rechts
+
+*/
+
+
