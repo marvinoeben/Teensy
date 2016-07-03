@@ -11,8 +11,8 @@ void loop() {
   int loop=floor(millis()/loop_duration/1000);
   int loop_progress=(millis()/1000) % loop_duration;
 
-  if (loop_progress < 50000) radar();
-  //if (loop_progress < 50000) radar();
+  //if (loop_progress < 50000) vrain();
+  if (loop_progress < 15) radar();
   //if (loop_progress < 5) debug();
   else if (loop_progress < 30) rider();
   else if (loop_progress < 38) _rider();
