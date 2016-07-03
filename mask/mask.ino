@@ -6,7 +6,7 @@
 #include "effects.h"
 
 #define DATA_PIN 14
-#define CLOCK_PIN    5
+
 // Number of leds defined in XYmap.h
 
 void setup() { 

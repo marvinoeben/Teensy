@@ -1,44 +1,30 @@
-functionList effectList[] = {//single, // Made by Marvin
-                             //inward, // Made by Marvin
-                             rider,
-                             threeSine,
-                             plasma,
-                             confetti,
-                             glitter,
-                             slantBars,
-                             colorFill,
-                             sideRain
-                            };
-const byte numEffects = (sizeof(effectList)/sizeof(effectList[0]));
-
 void loop() {
   currentMillis = millis(); // save the current timer value
 
-  if ((millis() % 1000) < 500) digitalWrite(13, HIGH);
+  int blink_interval=100;
+  if (millis() > 10000) blink_interval=500;
+
+  if ((millis() % (blink_interval*2)) < blink_interval) digitalWrite(13, HIGH);
   else digitalWrite(13, LOW);
 
-  // switch to a new effect every cycleTime milliseconds
-  if (currentMillis - cycleMillis > cycleTime && autoCycle == true) {
-    cycleMillis = currentMillis;
-    if (++currentEffect >= numEffects) currentEffect = 0; // loop to start of effect list
-    effectInit = false; // trigger effect initialization when new effect is selected
-  }
+  int loop_duration=135;
+  int loop=floor(millis()/loop_duration/1000);
+  int loop_progress=(millis()/1000) % loop_duration;
 
-  // increment the global hue value every hueTime milliseconds
-  if (currentMillis - hueMillis > hueTime) {
-    hueMillis = currentMillis;
-    hueCycle(1); // increment the global hue value
-  }
 
-  // run the currently selected effect every effectDelay milliseconds
-  if (currentMillis - effectMillis > effectDelay) {
-    effectMillis = currentMillis;
-    effectList[currentEffect](); // run the selected effect function
-    random16_add_entropy(1); // make the random values a bit more random-ish
-  }
+  if (loop_progress < 50000) radar();
+  //if (loop_progress < 5) debug();
+  else if (loop_progress < 30) rider();
+  else if (loop_progress < 38) _rider();
+  else if (loop_progress < 45) threeSine();
+  else if (loop_progress < 60) plasma();
+  else if (loop_progress < 75) { confetti(); fadeAll(1);  }
+  else if (loop_progress < 90) glitter();
+  else if (loop_progress < 105) slantBars();
+  else if (loop_progress < 120) colorFill();
+  else if (loop_progress < 135) sideRain();
 
-  // run a fade effect too if the confetti effect is running
-  if (effectList[currentEffect] == confetti) fadeAll(1);
+  hueCycle(1); // increment the global hue value
 
   FastLED.show(); // send the contents of the led memory to the LEDs
  }

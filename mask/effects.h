@@ -1,10 +1,84 @@
-//   Graphical effects to run on the RGB Shades LED array
-//   Each function should have the following components:
-//    * Must be declared void with no parameters or will break function pointer array
-//    * Check effectInit, if false then init any required settings and set effectInit true
-//    * Set effectDelay (the time in milliseconds until the next run of this effect)
-//    * All animation should be controlled with counters and effectDelay, no delay() or loops
-//    * Pixel data should be written using leds[XY(x,y)] to map coordinates to the RGB Shades layout
+float radar_angle=0;
+float radar_angle2= 3.14/2;
+float radar_angle3= 3.14;
+float radar_angle4= 3.14+3.14/2;
+void radar() {
+
+  int y=0;
+  int x=0;
+  int y2=0;
+  int x2=0;
+  int y3=0;
+  int x3=0;
+  int y4=0;
+  int x4=0;
+fadeAll(75);
+  EVERY_N_MILLISECONDS(5) {
+
+
+    int sz=1;
+    int oz=sin(180);
+
+
+    int i=0;
+    while (i<10) {
+
+        x=cos(radar_angle)*i;
+        y=sin(radar_angle)*i;
+        leds[XY((kMatrixWidth/2)+x, (kMatrixHeight/2)+y)] = CHSV(0, 255, 255);
+        x2=cos(radar_angle2)*i;
+        y2=sin(radar_angle2)*i;
+        leds[XY((kMatrixWidth/2)+x2, (kMatrixHeight/2)+y2)] = CHSV(120, 255, 255);
+        x3=cos(radar_angle3)*i;
+        y3=sin(radar_angle3)*i;
+        leds[XY((kMatrixWidth/2)+x3, (kMatrixHeight/2)+y3)] = CHSV(240, 255, 255);
+        x4=cos(radar_angle4)*i;
+        y4=sin(radar_angle4)*i;
+        leds[XY((kMatrixWidth/2)+x4, (kMatrixHeight/2)+y4)] = CHSV(240, 0, 255);
+
+
+
+      i++;
+    }
+
+    //leds[XY(round(sin(0))+8, y)] = CHSV(128, 255, 255);
+    radar_angle+=(3.141596/100);
+    radar_angle2+=(3.141596/100);
+    radar_angle3+=(3.141596/100);
+    radar_angle4+=(3.141596/100);
+
+  }
+
+}
+
+
+
+
+int rider_inc_x=1;
+int rider_x=0;
+
+void _rider() {
+
+  int y=0;
+  EVERY_N_MILLISECONDS(50) {
+    fadeAll(90);
+
+    while (y<kMatrixHeight) {
+      leds[XY(rider_x, y)] = CHSV(0, 255, 255);
+      y++;
+    }
+    rider_x=rider_x+rider_inc_x;
+
+    if (rider_x > kMatrixWidth) rider_inc_x=-1;
+    if (rider_x <= 0) rider_inc_x=1;
+
+  }
+
+}
+
+void debug() {
+  leds[0]=CHSV(0, 255, 255);
+}
 
 // Triple Sine Waves
 void threeSine() {
@@ -71,7 +145,7 @@ void single(){
     effectInit = true;
     effectDelay = 15;
   }
-  for (byte x = 0; x < kMatrixWidth; x++){    
+  for (byte x = 0; x < kMatrixWidth; x++){
     for (byte y = 0; y < kMatrixHeight; y++){
      leds[XY(x,y)] = CRGB::Blue;
     }
@@ -79,7 +153,7 @@ void single(){
     for (byte y = 0; y < kMatrixHeight; y++){
      leds[XY(x,y)] = CRGB::Black;
     }
-    delay(500);  
+    delay(500);
   }
 }
 // Inward spiral.
@@ -120,7 +194,7 @@ void inward(){
               leds[routeMap[dot-2]] = CRGB::Black;
               delay(50);
             }
-      } 
+      }
 }
 
 
