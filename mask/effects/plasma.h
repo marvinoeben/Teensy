@@ -18,7 +18,7 @@ void plasma() {
   for (int x = 0; x < kMatrixWidth; x++) {
     for (int y = 0; y < kMatrixHeight; y++) {
       byte color = sin8(sqrt(sq(((float)x - 7.5) * 10 + xOffset - 127) + sq(((float)y - 2) * 10 + yOffset - 127)) + offset);
-      leds[XY(x, y)] = CHSV(color, 255, 255);
+      leds[XY(x, y)] = CHSV(color, 255, tweaked_brightness/5);
     }
   }
 

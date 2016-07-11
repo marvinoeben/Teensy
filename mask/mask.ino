@@ -1,4 +1,4 @@
-// Include FastLED library and other useful files
+  // Include FastLED library and other useful files
 #include <FastLED.h>
 #include <EEPROM.h>
 #include "XYmap.h"
@@ -6,7 +6,6 @@
 #include "effects.h"
 
 #define DATA_PIN 14
-
 // Number of leds defined in XYmap.h
 
 void setup() {
@@ -21,4 +20,3 @@ void setup() {
 }
 
 #include "runfile.h"
-

@@ -3,11 +3,11 @@ void threeSine() {
 
   static byte sineOffset = 0; // counter for current position of sine waves
 
-  // startup tasks
-  if (effectInit == false) {
-    effectInit = true;
-    effectDelay = 20;
+  EVERY_N_MILLISECONDS(50) {
+    fadeAll(90);
   }
+
+  EVERY_N_MILLISECONDS(100) {
 
   // Draw one frame of the animation into the LED array
   for (byte x = 0; x < kMatrixWidth; x++) {
@@ -24,5 +24,5 @@ void threeSine() {
   }
 
   sineOffset++; // byte will wrap from 255 to 0, matching sin8 0-255 cycle
-
+}
 }

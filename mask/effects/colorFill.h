@@ -1,6 +1,14 @@
 // Fills saturated colors into the array from alternating directions
 void colorFill() {
 
+
+
+  EVERY_N_MILLISECONDS(50) {
+    fadeAll(90);
+  }
+
+  EVERY_N_MILLISECONDS(50) {
+
   static byte currentColor = 0;
   static byte currentRow = 0;
   static byte currentDirection = 0;
@@ -47,5 +55,5 @@ void colorFill() {
     effectDelay = 300; // wait a little bit longer after completing a fill
   }
 
-
+}
 }

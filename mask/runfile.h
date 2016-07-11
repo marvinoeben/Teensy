@@ -7,22 +7,37 @@ void loop() {
   if ((millis() % (blink_interval*2)) < blink_interval) digitalWrite(13, HIGH);
   else digitalWrite(13, LOW);
 
-  int loop_duration=135;
-  int loop=floor(millis()/loop_duration/1000);
-  int loop_progress=(millis()/1000) % loop_duration;
 
-  //if (loop_progress < 50000) vrain();
-  if (loop_progress < 15) radar();
-  //if (loop_progress < 5) debug();
-  else if (loop_progress < 30) rider();
-  else if (loop_progress < 38) _rider();
-  else if (loop_progress < 45) threeSine();
-  else if (loop_progress < 60) plasma();
-  else if (loop_progress < 75) { confetti(); fadeAll(1);  }
-  else if (loop_progress < 90) glitter();
-  else if (loop_progress < 105) slantBars();
-  else if (loop_progress < 120) colorFill();
-  else if (loop_progress < 135) sideRain();
+
+
+  int loop_duration=210;
+  int skip_seconds=0;
+  int second_now = ((millis() / 1000) + skip_seconds) % loop_duration;
+  int second_all = ((millis() / 1000) + skip_seconds);
+
+
+  if (second_all < 60) {
+    if (second_now < 0) {}
+    else if (second_now < 20) earthcore(true);
+    else if (second_now < 40) vrain(true);
+    //else if (second_now < 40) hrain(true);
+    else if (second_now < 60) cars(perfect_speed, perfect_position, cars_color, perfect_length, false, true, -1);
+  } else {
+      if (1==2) {}
+      else if (second_now < 30) cars(perfect_speed, perfect_position, cars_color, perfect_length, false, false, -1);
+      else if (second_now < 60) earthcore(false);
+      //else if (second_now < 90) hrain(false);
+      else if (second_now < 90) vrain(false);
+      else if (second_now < 120) _rider();
+      else if (second_now < 150) glitter();
+      else if (second_now < 180) sideRain();
+      else if (second_now < 210) radar();
+
+  }
+
+
+
+
 
   hueCycle(1); // increment the global hue value
 

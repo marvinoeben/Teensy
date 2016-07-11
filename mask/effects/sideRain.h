@@ -1,16 +1,18 @@
 // Random pixels scroll sideways, uses current hue
-#define rainDir 0
+int rainDirection=0;
+
+int rainLoops=0;
+
 void sideRain() {
 
-  // startup tasks
-  if (effectInit == false) {
-    effectInit = true;
-    effectDelay = 30;
+  EVERY_N_MILLISECONDS(100) {
+
+    scrollArray(rainDirection);
+    byte randPixel = random8(kMatrixHeight);
+    for (byte y = 0; y < kMatrixHeight; y++) leds[XY((kMatrixWidth - 1) * rainDirection, y)] = CRGB::Black;
+    leds[XY((kMatrixWidth - 1)*rainDirection, randPixel)] = CHSV(cycleHue, 255, tweaked_brightness/2);
+    rainLoops++;
+    if (rainLoops % 100 == 0) rainDirection=1;
+    if (rainLoops % 100 == 50) rainDirection=0;
   }
-
-  scrollArray(rainDir);
-  byte randPixel = random8(kMatrixHeight);
-  for (byte y = 0; y < kMatrixHeight; y++) leds[XY((kMatrixWidth - 1) * rainDir, y)] = CRGB::Black;
-  leds[XY((kMatrixWidth - 1)*rainDir, randPixel)] = CHSV(cycleHue, 255, 255);
-
 }

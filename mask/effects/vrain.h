@@ -1,31 +1,52 @@
 int vrain_i=0;
 
-void vrain() {
+void vrain(boolean glasses) {
+  EVERY_N_MILLISECONDS(15) {
+    fadeAll(90);
+  }
+  int sat=255;
+  if (glasses) sat=0;
+  EVERY_N_MILLISECONDS(35) {
 
-  float x=0;
+        float sin_x;
+        int i=0;
+        while (i<=kMatrixHeight) {
+          sin_x=round(sin((vrain_i+(i*2)) * M_PI / 30) * ceil(kMatrixWidth/2) + ceil(kMatrixWidth/2) );
+          leds[XY(sin_x, i)] = CHSV(cycleHue, sat, tweaked_brightness/2);
+
+          sin_x=round(-sin((vrain_i+(i*2)) * M_PI / 30) * ceil(kMatrixWidth/2) + ceil(kMatrixWidth/2) );
+          leds[XY(sin_x, i)] = CHSV(cycleHue, sat, tweaked_brightness/2);
+
+          i++;
+        }
+
+      vrain_i++;
+  }
+}
+
+void hrain(boolean glasses) {
+  EVERY_N_MILLISECONDS(15) {
+    fadeAll(90);
+  }
 
 
 
+  int sat=255;
+  if (glasses) sat=0;
+  EVERY_N_MILLISECONDS(35) {
+//chsv_all_except(0, 0, 0, 0);
+        float sin_y;
+        int i=0;
+        while (i<=kMatrixWidth) {
+          sin_y=round(sin((vrain_i+(i*2)) * M_PI / 30) * ceil(kMatrixHeight/2) + ceil(kMatrixHeight/2) );
+          leds[XY(i, sin_y)] = CHSV(cycleHue, sat, tweaked_brightness);
 
+          sin_y=round(-sin((vrain_i+(i*2)) * M_PI / 30) * ceil(kMatrixHeight/2) + ceil(kMatrixHeight/2) );
+          leds[XY(i, sin_y)] = CHSV(cycleHue, sat, tweaked_brightness);
 
-  EVERY_N_MILLISECONDS(25) {
+          i++;
+        }
 
-      fadeAll(90);
-//      if (vrain_i > kMatrixWidth) vrain_i=0;
-      int y=0;
-      //while (y<kMatrixHeight) {
-        float sin_x=round(sin(vrain_i * M_PI / 100) * (kMatrixWidth/2) + (kMatrixWidth/2) );
-
-        leds[XY(sin_x, 0)] = CHSV(120, 255, 255);
-
-        sin_x=round(sin(vrain_i * M_PI / 100) * (kMatrixWidth/2) + (kMatrixWidth/2) );
-
-        leds[XY(sin_x, 1)] = CHSV(0, 255, 255);
-
-
-        //y++;
-
-      //}
       vrain_i++;
   }
 }

@@ -122,6 +122,14 @@ void confirmBlink() {
   }
 
 }
+
+void chsv_all_except(int h, int s, int v, boolean except[]) { // Function by NpZ
+  for(int i = 0 ; i < NUM_LEDS; i++ ) {
+    if (except[i] != true) leds[i] = CHSV(h, s, v);
+  }
+}
+
+
 /*
 // Determine flash address of text string
 unsigned int currentStringAddress = 0;
